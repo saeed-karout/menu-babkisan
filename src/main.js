@@ -53,7 +53,7 @@ i18n.global.locale.value = appStore.language
 
 // ضبط اتجاه النص بناءً على اللغة
 const updateDirection = (lang) => {
-  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr')
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'ltr' : 'ltr')
 }
 
 // ضبط الاتجاه عند بدء التطبيق

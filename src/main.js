@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { useAppStore } from './stores/appStore'
 
 const app = createApp(App)
 
@@ -22,5 +23,7 @@ library.add(fas, far, fab)
 app.use(createPinia())
 app.use(router)
 
+const appStore = useAppStore();
+appStore.initializeLanguage();
 app.mount('#app')
 app.component('font-awesome-icon', FontAwesomeIcon)

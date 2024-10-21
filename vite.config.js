@@ -14,5 +14,15 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  // إضافة إعدادات الـ proxy لحل مشكلة CORS
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://www.api.babkisanresturant.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '') // إزالة '/api' من بداية كل رابط
+      }
+    }
   }
 })

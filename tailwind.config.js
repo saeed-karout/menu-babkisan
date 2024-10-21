@@ -5,8 +5,10 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        "bg":"#F7F3E8",
-        "brownColor":"#776151"
+        "bg":"#b28f48",
+        "brownColor":"#034428",
+        "textBrown":"#034428"
+        // 776151
       }
     },
   },

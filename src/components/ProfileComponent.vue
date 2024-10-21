@@ -20,7 +20,7 @@
     <!-- صورة الملف الشخصي والاسم وروابط التواصل الاجتماعي -->
     <div class="text-center mt-4 relative -top-[70px]">
       <img :src="imgProfile" alt="Albab Alsharqy Logo"
-        class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-md" />
+        class="w-28 h-28 mx-auto rounded-full  border-white shadow-md" />
       <h1 class="text-2xl font-bold">Bab Kisan</h1>
       <div class="flex justify-center space-x-4 text-xl">
         <a v-for="(social, index) in socialLinks" :key="index" :href="social.url" target="_blank"

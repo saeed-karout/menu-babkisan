@@ -19,22 +19,12 @@
 
     <!-- صورة الملف الشخصي والاسم وروابط التواصل الاجتماعي -->
     <div class="text-center mt-4 relative -top-[70px]">
-      <img
-        :src="imgProfile"
-        alt="Albab Alsharqy Logo"
-        class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-md"
-      />
+      <img :src="imgProfile" alt="Albab Alsharqy Logo"
+        class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-md" />
       <h1 class="text-2xl font-bold">Bab Kisan</h1>
       <div class="flex justify-center space-x-4 text-xl">
-        <a
-          v-for="(social, index) in socialLinks"
-          :key="index"
-          :href="social.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-brownColor hover:text-gray-700 transition"
-          :aria-label="social.name"
-        >
+        <a v-for="(social, index) in socialLinks" :key="index" :href="social.url" target="_blank"
+          rel="noopener noreferrer" class="text-brownColor hover:text-gray-700 transition" :aria-label="social.name">
           <font-awesome-icon :icon="[social.platform, social.icon]" />
         </a>
       </div>
@@ -43,29 +33,35 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, onMounted } from 'vue';
 import { useAppStore } from '@/stores/appStore';
-import { useI18n } from 'vue-i18n';
 import imgBg from '@/assets/images/bg-profile.jpg';
 import imgProfile from '@/assets/images/img-profile.jpg';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'ProfileCard',
   setup() {
-    const appStore = useAppStore();
-    const { locale } = useI18n();
+    const dataStore = useAppStore();
+    const { t, locale } = useI18n();
 
-    const currentLanguage = computed(() => appStore.language);
+    const currentLanguage = computed(() => dataStore.language);
 
     const toggleLanguage = () => {
-      const newLang = currentLanguage.value === 'en' ? 'ar' : 'en';
-      appStore.setLanguage(newLang);
-      locale.value = newLang;
-      // تحديث اتجاه النص إذا لزم الأمر
-      document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+      const newLanguage = currentLanguage.value === 'en' ? 'ar' : 'en';
+      dataStore.setLanguage(newLanguage);
+      locale.value = newLanguage;
+      // تحديث اتجاه الصفحة
+      document.documentElement.setAttribute('dir', newLanguage === 'ar' ? 'rtl' : 'ltr');
     };
 
-    // روابط التواصل الاجتماعي
+    onMounted(() => {
+      dataStore.initializeLanguage();
+      locale.value = dataStore.language;
+      // تحديث اتجاه النص عند بدء المكون
+      document.documentElement.setAttribute('dir', dataStore.language === 'ar' ? 'rtl' : 'ltr');
+    });
+
     const socialLinks = [
       { platform: 'fab', icon: 'whatsapp', name: 'WhatsApp', url: 'https://wa.me/+966503954909' },
       {
@@ -101,15 +97,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.text-brownColor {
-  color: #8B5E34;
-}
-.bg-textBrown {
-  background-color: #8B5E34;
-}
-.bg-bg {
-  background-color: #FAF5E4;
-}
 
 /* تحسينات إضافية */
 button {

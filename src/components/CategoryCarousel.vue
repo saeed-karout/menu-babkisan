@@ -62,7 +62,7 @@ import { useAppStore } from '@/stores/appStore'; // استيراد Pinia store
 export default {
   name: 'CategorySlider',
   setup() {
-    const appStore = useAppStore(); // استخدام الـ store من Pinia
+    const dataStore = useAppStore(); // استخدام الـ store من Pinia
 
     const categories = ref([]);
     const selectedCategoryItems = ref([]);
@@ -83,7 +83,7 @@ export default {
     // جلب الفئات من الـ API
     const fetchCategories = async () => {
       try {
-        const response = await axiosInstance.get('https://www.api.babkisanresturant.com/api/categories/items');
+        const response = await axiosInstance.get('categories/items'); // استخدم الـ baseURL المعيّن في axiosInstance
         if (response.status === 200) {
           categories.value = response.data.data;
           if (categories.value.length > 0) {
@@ -204,7 +204,7 @@ export default {
 
     // مراقبة تغيير اللغة وإعادة جلب الفئات
     watch(
-      () => appStore.language,
+      () => dataStore.language,
       () => {
         fetchCategories();
       }

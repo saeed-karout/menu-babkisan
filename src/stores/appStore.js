@@ -1,20 +1,21 @@
-// appStore.js
-import { defineStore } from 'pinia';
+// src/stores/appStore.js
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useAppStore = defineStore('appStore', {
-  state: () => ({
-    language: 'en', // اللغة الافتراضية
-  }),
-  actions: {
-    setLanguage(lang) {
-      this.language = lang;
-      localStorage.setItem('appLanguage', lang);
-    },
-    initializeLanguage() {
-      const storedLanguage = localStorage.getItem('appLanguage');
-      if (storedLanguage) {
-        this.language = storedLanguage;
-      }
-    },
-  },
-});
+export const useAppStore = defineStore('appStore', () => {
+  const language = ref('en') // اللغة الافتراضية
+
+  const setLanguage = (lang) => {
+    language.value = lang
+    localStorage.setItem('appLanguage', lang)
+  }
+
+  const initializeLanguage = () => {
+    const storedLanguage = localStorage.getItem('appLanguage')
+    if (storedLanguage) {
+      language.value = storedLanguage
+    }
+  }
+
+  return { language, setLanguage, initializeLanguage }
+})

@@ -15,9 +15,12 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
-import i18n from './i18n'
+import i18n from './i18n' // تأكد من أن i18n.js موجود في src/
 
-import { useAppStore } from './stores/appStore'
+import { useAppStore } from './stores/appStore' // استخدم store الخاص بك
+
+
+import axiosInstance from './axiosInstance' // استيراد axiosInstance
 
 const app = createApp(App)
 
@@ -36,6 +39,14 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 // تهيئة اللغة من الـ store
 const appStore = useAppStore()
 appStore.initializeLanguage()
+
+// إعداد interceptor لتضمين ترويسة Accept-Language
+axiosInstance.interceptors.request.use((config) => {
+  config.headers['Accept-Language'] = appStore.language
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
 
 // ضبط لغة vue-i18n بناءً على اللغة في الـ store
 i18n.global.locale.value = appStore.language
@@ -57,4 +68,7 @@ watch(
   }
 )
 
+
+
+// تركيب التطبيق
 app.mount('#app')

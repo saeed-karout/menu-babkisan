@@ -13,7 +13,7 @@
         class="text-gray-700 hover:text-gray-900 text-lg dark:text-gray-300"
         aria-label="Toggle Language"
       >
-        {{ currentLanguage === 'en' ? 'AR' : 'EN' }}
+        {{ currentLanguage === 'en' ? 'ar' : 'en' }}
       </button>
     </div>
 
@@ -90,7 +90,7 @@ export default defineComponent({
       socialLinks,
       imgBg,
       imgProfile,
-      t, // تأكد من إرجاع `t` لاستخدامها في القالب
+      t, 
     }
   },
 })

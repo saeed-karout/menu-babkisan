@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useAppStore = defineStore('appStore', () => {
-  const language = ref('ar') // اللغة الافتراضية
+  const language = ref('en') // اللغة الافتراضية
 
   const setLanguage = (lang) => {
     language.value = lang

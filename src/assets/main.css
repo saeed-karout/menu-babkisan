@@ -5,9 +5,9 @@
 
 
 body{
-    background-image: url('../assets/images/bg.jpg') ;
-    max-width: 600px;
+    
+    width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-size: cover;
+    
 }

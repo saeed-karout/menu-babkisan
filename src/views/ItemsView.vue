@@ -1,9 +1,98 @@
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+import { useRoute, useRouter } from 'vue-router';
+import LoadingComponents from '@/components/LoadingComponents.vue';
+import { useAppStore } from '@/stores/appStore'; // استخدام Pinia لتخزين اللغة
+import img from '../assets/images/bg.jpg'; // استيراد الصورة
+
+const route = useRoute();
+const router = useRouter();
+const slug = route.params.slug;
+const item = ref(null);
+const error = ref('');
+const appStore = useAppStore(); // استخدام اللغة المختارة من Pinia
+
+// دالة لجلب بيانات العنصر بناءً على الـ slug
+const fetchItem = async () => {
+  try {
+    const response = await axios.get(`https://www.api.babkisanresturant.com/api/categories/items/${slug}`, {
+      headers: {
+        'Accept-Language': appStore.language, // استخدام اللغة من Pinia
+      },
+    });
+    if (response.status === 200) {
+      item.value = response.data.data;
+    } else {
+      error.value = 'لم يتم العثور على العنصر المطلوب.';
+    }
+  } catch (err) {
+    console.error('Error fetching item:', err);
+    error.value = 'حدث خطأ أثناء جلب بيانات العنصر.';
+  }
+};
+
+// دالة للعودة إلى الصفحة السابقة
+const goBack = () => {
+  router.go(-1); // للعودة إلى الصفحة السابقة
+};
+
+// دالة للمشاركة
+const shareLink = async () => {
+  if (!item.value) {
+    alert('العنصر غير متاح للمشاركة.');
+    return;
+  }
+
+  const shareData = {
+    title: item.value.name || 'مشاركة عنصر',
+    text: item.value.description
+      ? item.value.description.substring(0, 100) + (item.value.description.length > 100 ? '...' : '')
+      : 'تفاصيل العنصر',
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      console.log('تمت المشاركة بنجاح');
+    } catch (err) {
+      console.error('فشل في المشاركة:', err);
+    }
+  } else if (navigator.clipboard) {
+    // الفallback: نسخ الرابط إلى الحافظة
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      alert('تم نسخ الرابط إلى الحافظة');
+    } catch (err) {
+      console.error('فشل في نسخ الرابط:', err);
+      alert('فشل في نسخ الرابط. يرجى نسخه يدويًا.');
+    }
+  } else {
+    // إذا لم يكن هناك دعم للمشاركة أو النسخ
+    prompt('يرجى نسخ الرابط التالي:', shareData.url);
+  }
+};
+
+// خاصية محوسبة لتحديد حالة التحميل
+const isLoading = computed(() => !item.value && !error.value);
+
+// دالة لفشل تحميل الصورة
+const onImageError = (event) => {
+  event.target.src = '/path/to/default-image.jpg'; // وضع مسار صورة افتراضية هنا
+};
+
+// جلب بيانات العنصر عند تحميل المكون
+onMounted(() => {
+  fetchItem();
+});
+
+</script>
+
 <template>
   <div
-    :class="[
-      'h-screen mx-auto',
-      isLoading ? 'overflow-hidden' : 'overflow-auto'
-    ]"
+    :class="[ 'h-screen mx-auto max-w-[600px]', isLoading ? 'overflow-hidden' : 'overflow-auto' ]"
+    :style="{ backgroundImage: `url(${img})` }"
   >
     <!-- عرض رسالة الخطأ إذا كانت موجودة -->
     <div v-if="error" class="text-red-500 text-center p-4">
@@ -13,7 +102,6 @@
     <!-- عرض بيانات العنصر إذا تم جلبها بنجاح -->
     <div v-else-if="item">
       <div class="relative mb-4">
-
         <!-- صورة العنصر -->
         <img
           :src="item.image"
@@ -67,111 +155,13 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
-import { useRoute, useRouter } from 'vue-router';
-import LoadingComponents from '@/components/LoadingComponents.vue';
-import { useAppStore } from '@/stores/appStore'; // استخدام Pinia لتخزين اللغة
-
-export default {
-  name: 'FoodItemCard',
-  components: { LoadingComponents },
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const slug = route.params.slug;
-    const item = ref(null);
-    const error = ref('');
-    const appStore = useAppStore(); // استخدام اللغة المختارة من Pinia
-
-    // دالة لجلب بيانات العنصر بناءً على الـ slug
-    const fetchItem = async () => {
-      try {
-        const response = await axios.get(`https://www.api.babkisanresturant.com/api/categories/items/${slug}`, {
-          headers: {
-            'Accept-Language': appStore.language, // استخدام اللغة من Pinia
-          },
-        });
-        if (response.status === 200) {
-          item.value = response.data.data;
-        } else {
-          error.value = 'لم يتم العثور على العنصر المطلوب.';
-        }
-      } catch (err) {
-        console.error('Error fetching item:', err);
-        error.value = 'حدث خطأ أثناء جلب بيانات العنصر.';
-      }
-    };
-
-    // دالة للعودة إلى الصفحة السابقة
-    const goBack = () => {
-      router.go(-1); // للعودة إلى الصفحة السابقة
-    };
-
-    // دالة للمشاركة
-    const shareLink = async () => {
-      if (!item.value) {
-        alert('العنصر غير متاح للمشاركة.');
-        return;
-      }
-
-      const shareData = {
-        title: item.value.name || 'مشاركة عنصر',
-        text: item.value.description
-          ? item.value.description.substring(0, 100) + (item.value.description.length > 100 ? '...' : '')
-          : 'تفاصيل العنصر',
-        url: window.location.href,
-      };
-
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          console.log('تمت المشاركة بنجاح');
-        } catch (err) {
-          console.error('فشل في المشاركة:', err);
-        }
-      } else if (navigator.clipboard) {
-        // الفallback: نسخ الرابط إلى الحافظة
-        try {
-          await navigator.clipboard.writeText(shareData.url);
-          alert('تم نسخ الرابط إلى الحافظة');
-        } catch (err) {
-          console.error('فشل في نسخ الرابط:', err);
-          alert('فشل في نسخ الرابط. يرجى نسخه يدويًا.');
-        }
-      } else {
-        // إذا لم يكن هناك دعم للمشاركة أو النسخ
-        prompt('يرجى نسخ الرابط التالي:', shareData.url);
-      }
-    };
-
-    // خاصية محوسبة لتحديد حالة التحميل
-    const isLoading = computed(() => !item.value && !error.value);
-
-    // دالة لفشل تحميل الصورة
-    const onImageError = (event) => {
-      event.target.src = '/path/to/default-image.jpg'; // وضع مسار صورة افتراضية هنا
-    };
-
-    // جلب بيانات العنصر عند تحميل المكون
-    onMounted(() => {
-      fetchItem();
-    });
-
-    return {
-      item,
-      error,
-      goBack,
-      shareLink,
-      isLoading, // إعادة خاصية isLoading للاستخدام في القالب
-      onImageError, // إضافة دالة فشل الصورة
-    };
-  },
-};
-</script>
-
 <style scoped>
+.img {
+  background-size: contain;
+  background-position: center; /* إضافة لتحسين وضعية الصورة */
+  width: 100%;
+  height: 100vh;
+}
 .border-img {
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;

@@ -5,7 +5,11 @@ import { useRoute, useRouter } from 'vue-router';
 import LoadingComponents from '@/components/LoadingComponents.vue';
 import { useAppStore } from '@/stores/appStore'; // استخدام Pinia لتخزين اللغة
 import img from '../assets/images/bg.jpg'; // استيراد الصورة
+import imageDefault from '@/assets/logo.jpg'
+import { useI18n } from 'vue-i18n';
 
+
+const {t} = useI18n();
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.slug;
@@ -79,7 +83,7 @@ const isLoading = computed(() => !item.value && !error.value);
 
 // دالة لفشل تحميل الصورة
 const onImageError = (event) => {
-  event.target.src = '/path/to/default-image.jpg'; // وضع مسار صورة افتراضية هنا
+  event.target.src = imageDefault; // وضع مسار صورة افتراضية هنا
 };
 
 // جلب بيانات العنصر عند تحميل المكون
@@ -142,7 +146,7 @@ onMounted(() => {
         </p>
         <div class="text-start">
           <button class="bg-brownColor text-white px-2 py-1 rounded-md text-md font-semibold">
-            SAR {{ item.price }}
+            {{ t('sar') }} {{ item.price }}
           </button>
         </div>
       </div>

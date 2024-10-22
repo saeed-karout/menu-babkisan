@@ -7,6 +7,13 @@
     "contact": "Contact",
     "projects": "Projects"
   },
-  "brand":"bab kisan"
- 
+  "brand": "bab kisan",
+  
+   
+    "loadingCategories": "Loading categories...",
+    "loadingItems": "Loading items...",
+    "errorCategories": "Failed to load categories. Please try again later.",
+    "errorItems": "Failed to load items. Please try again later.",
+    "sar": "SAR"
+  
 }

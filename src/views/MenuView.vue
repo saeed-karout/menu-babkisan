@@ -1,6 +1,7 @@
 <script setup>
 import CategoryCarousel from '@/components/CategoryCarousel.vue';
 import ProfileComponent from '@/components/ProfileComponent.vue';
+import FooterMenu from '@/components/FooterMenu.vue';
 import img from '../assets/images/bg.jpg';
 </script>
 
@@ -11,6 +12,7 @@ import img from '../assets/images/bg.jpg';
   >
     <ProfileComponent />
     <CategoryCarousel />
+    <FooterMenu />
   </div>
 </template>
 

@@ -13,8 +13,11 @@
 
     <!-- صورة الملف الشخصي والاسم وروابط التواصل الاجتماعي -->
     <div class="text-center mt-4 relative -top-[100px]">
-      <img :src="imgProfile" alt="Albab Alsharqy Logo"
-        class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-md" />
+      <router-link to="/">
+
+        <img :src="imgProfile" alt="Albab Alsharqy Logo"
+          class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-md" />
+      </router-link>
       <h1 class="text-2xl font-bold">{{ t('brand') }}</h1>
       <div class="flex justify-center items-center text-center space-x-4 text-xl">
         <a v-for="(social, index) in socialLinks" :key="index" :href="social.url" target="_blank"

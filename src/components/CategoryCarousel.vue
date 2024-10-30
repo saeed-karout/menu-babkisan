@@ -25,7 +25,7 @@
     </div>
 
     <!-- عرض العناصر -->
-    <div class="mt-4">
+    <div class="mt-4 p-2 bg-transparent">
       <h2 class="text-xl text-brownColor font-semibold mb-6">
         {{ selectedCategoryName }}
       </h2>
@@ -44,7 +44,7 @@
           :to="{ name: 'FoodItem', params: { slug: item.slug } }"
           class="block"
         >
-          <div class="flex items-start p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
+          <div class="flex items-start p-4 rounded-lg shadow-sm transition">
             <div class="flex-1">
               <h3 class="text-xl font-semibold mb-2">{{ item.name }}</h3>
               <div class="flex items-center space-x-4 mb-2">

@@ -16,7 +16,7 @@
 
       <!-- الشعار -->
       <router-link to="/">
-        <img src="@/assets/logoNav.png" alt="Logo" class="w-10 flex-none" />
+        <img src="../../assets/images/babkisan.png" alt="Logo" class="w-10 flex-none" />
       </router-link>
     </div>
 

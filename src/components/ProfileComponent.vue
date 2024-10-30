@@ -1,6 +1,6 @@
 <!-- src/components/ProfileCard.vue -->
 <template>
-  <div :dir="currentLanguage === 'ar' ? 'rtl' : 'ltr'" class="w-full h-[395px] mx-auto rounded-lg">
+  <div :dir="currentLanguage === 'ar' ? 'ltr' : 'ltr'" class="w-full h-[395px] mx-auto rounded-lg">
     <!-- صورة الغلاف -->
     <div class="relative">
       <img :src="imgBg" alt="Restaurant Cover" class="w-full h-[36vh] object-cover rounded-t-lg" />

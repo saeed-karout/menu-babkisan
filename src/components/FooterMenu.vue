@@ -1,5 +1,5 @@
 <template>
-    <div class="h-32 flex justify-between mx-5 bg-transparent items-center">
+    <div class="h-32 flex justify-between mx-5 bg-transparent items-center" dir="ltr">
 
 
 
@@ -7,14 +7,13 @@
 
         <div class="">
 
-            <span class="flex gap-1 text-sm text-gray-500 dark:text-gray-300">
-                powered By
-                <a href="https://www.instagram.com/snc.ltd?igsh=ODEwODVmeXhwdGh6" target="_blank"
-                    class="gradient-text flex items-center">
 
-                    <img src="/src/assets/images/plateau.png" width="22px" alt="">
+              <a href="https://plateau.media/" dir="ltr" target="_blank" class="flex items-center gap-2">
+                    <span>powered By</span>
+                    <span class="gradient-text text-xs">PLateau</span>
+                    <img src="../assets/images/plateau.png" class="w-10 h-auto">
                 </a>
-            </span>
+
         </div>
 
         <div class="">
@@ -40,3 +39,15 @@
 <script setup>
 
 </script>
+
+
+<style scoped>
+   .gradient-text {
+        background: linear-gradient(90deg, #eb2952, #141823);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        /* Make text transparent to show gradient */
+    }
+</style>

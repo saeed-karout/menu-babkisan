@@ -9,10 +9,10 @@ const messages = {
 };
 
 const i18n = createI18n({
-  legacy: false, // استخدام Composition API
-  globalInjection: true, // تمكين الحقن العالمي
-  locale: 'en', // سيتم ضبطها لاحقًا في main.js بناءً على الـ Store
-  fallbackLocale: 'en',
+  legacy: false,
+  globalInjection: true,
+  locale: 'ar', // تغيير اللغة الافتراضية إلى العربية
+  fallbackLocale: 'ar', // تعيين اللغة الاحتياطية إلى العربية
   messages,
 });
 

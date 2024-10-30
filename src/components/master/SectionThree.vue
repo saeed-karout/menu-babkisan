@@ -1,33 +1,31 @@
 <template>
-  <div class="slider-container lg:p-20 md:p-12 sm:p-5 p-5">
+  <div :dir="currentLanguage === 'ar' ? 'rtl' : 'ltr'" class="slider-container lg:p-20 md:p-12 sm:p-5 p-5">
     <div class="container mx-auto px-4">
       <!-- قسم العنوان -->
       <div class="mb-8 text-center md:text-left">
         <p class="text-xs sm:text-sm tracking-widest uppercase">
-          Indulge in our signature dishes - the finest Middle Eastern cuisine
+          {{ t('sectionThree.subtitle') }}
         </p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-thin mb-4">
-          A Taste of <span class="text-Gold">Bab Kissan's</span> Culinary
+          {{ t('sectionThree.heading.part1') }} <span class="text-Gold">{{ t('sectionThree.heading.part2') }}</span> {{ t('sectionThree.heading.part3') }}
           <br class="hidden md:block" />
-          Artistry: Best <span class="text-Gold">Middle Eastern</span>
-          <span class="text-green-600"> Food in Riyadh</span>
+          {{ t('sectionThree.heading.part4') }} <span class="text-Gold">{{ t('sectionThree.heading.part5') }}</span>
+          <span class="text-green-600"> {{ t('sectionThree.heading.part6') }}</span>
         </h2>
         <div
           class="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 md:gap-8"
         >
           <p class="max-w-3xl text-sm md:text-base leading-relaxed">
-            Experience the vibrant flavors of Bab Kissan, where each dish is a
-            celebration of taste and artistry. If you're seeking an exceptional
-            dining experience in Jeddah, our menu features everything from
-            succulent grilled meats to flavorful mezze, inviting you to explore
-            the rich traditions of Middle Eastern cuisine. Your table at Bab
-            Kissan awaits!
+            {{ t('sectionThree.description') }}
           </p>
-          <button
-            class="text-md bg-transparent border border-white text-white py-2 px-6 rounded-full h-12 flex items-center justify-center hover:bg-Gold transition duration-300"
-          >
-            Explore Bab Kissan's Menu
-          </button>
+          <RouterLink to="/menu">
+
+            <button
+              class="text-md bg-transparent border border-white text-white py-2 px-6 rounded-full h-12 flex items-center justify-center hover:bg-Gold transition duration-300"
+            >
+              {{ t('sectionThree.buttonText') }}
+            </button>
+          </RouterLink>
         </div>
       </div>
 
@@ -77,52 +75,55 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import img1 from '@/assets/images/itemSectionTwo.png';
+import { useAppStore } from '@/stores/appStore';
 
-export default {
-  data() {
-    return {
-      menuItems: [
-        {
-          title: 'Shawarma',
-          image: img1,
-          description:
-            'Grilled flatbread filled with shrimp tempura, avocado topped with bite-sized tempura shrimp.',
-        },
-        {
-          title: 'Kebbeh & Shawarma',
-          image: img1,
-          description:
-            'Avocado wrapped red fish with salmon and truffle mayo then drizzled with unagi sauce.',
-        },
-        {
-          title: 'Ura Maki',
-          image: img1,
-          description:
-            'Ura maki style filled with wakame crab mix, cucumber, avocado, wasabi mayo topped with wasabi tobiko.',
-        },
-        {
-          title: 'Spicy Ura Maki',
-          image: img1,
-          description:
-            'Ura maki with shrimp tempura, cream cheese, cucumber, avocado, sweet and spicy wrap.',
-        },
-      ],
-    };
-  },
-  methods: {
-    scrollSlider(direction) {
-      const slider = this.$refs.slider;
-      const scrollAmount = slider.clientWidth * 0.9; // تعديل حسب الحاجة
+const { t } = useI18n({ useScope: 'global' });
 
-      slider.scrollBy({
-        left: direction * scrollAmount,
-        behavior: 'smooth',
-      });
-    },
+// استدعاء الـ store للحصول على اللغة الحالية
+const appStore = useAppStore();
+const currentLanguage = computed(() => appStore.language);
+
+// تعريف الـ ref للـ slider بشكل صحيح
+const slider = ref(null);
+
+// تعريف menuItems كمجموعة محوسبة تعتمد على اللغة الحالية
+const menuItems = computed(() => [
+  {
+    title: t('sectionThree.menuItems.item1.title'),
+    image: img1,
+    description: t('sectionThree.menuItems.item1.description'),
   },
-};
+  {
+    title: t('sectionThree.menuItems.item2.title'),
+    image: img1,
+    description: t('sectionThree.menuItems.item2.description'),
+  },
+  {
+    title: t('sectionThree.menuItems.item3.title'),
+    image: img1,
+    description: t('sectionThree.menuItems.item3.description'),
+  },
+  {
+    title: t('sectionThree.menuItems.item4.title'),
+    image: img1,
+    description: t('sectionThree.menuItems.item4.description'),
+  },
+]);
+
+// دالة تمرير السلايدر
+function scrollSlider(direction) {
+  if (slider.value) {
+    const scrollAmount = slider.value.clientWidth * 0.9;
+    slider.value.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth',
+    });
+  }
+}
 </script>
 
 <style scoped>

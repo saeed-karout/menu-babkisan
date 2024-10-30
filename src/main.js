@@ -1,11 +1,11 @@
 // src/main.js
 import './assets/main.css';
 
-import { createApp } from 'vue';
+import { createApp, watch } from 'vue';
 import { createPinia } from 'pinia';
 
 import App from './App.vue';
-import router from './router';
+import router from './router/index';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -34,13 +34,27 @@ app.use(i18n);
 // تسجيل FontAwesomeIcon كـ global component
 app.component('font-awesome-icon', FontAwesomeIcon);
 
-// تهيئة اللغة من الـ store بعد استخدام Pinia
+// تركيب التطبيق
+app.mount('#app');
+
+// الوصول إلى الـ store بعد تركيب التطبيق
 const appStore = useAppStore();
+
+// تهيئة اللغة من الـ store قبل مراقبة تغييرات اللغة
 appStore.initializeLanguage();
 
-// ضبط لغة vue-i18n بناءً على اللغة في الـ store
-i18n.global.locale.value = appStore.language;
+// ضبط لغة vue-i18n واتجاه الصفحة بناءً على اللغة في الـ store
+watch(
+  () => appStore.language,
+  (newLanguage) => {
+    i18n.global.locale.value = newLanguage;
+    document.dir = newLanguage === 'ar' ? 'rtl' : 'ltr';
+    console.log(`i18n and document.dir set to: ${newLanguage}`); // Debugging
+  },
+  { immediate: true }
+);
 
+// إعداد axiosInstance لتضمين Accept-Language
 axiosInstance.interceptors.request.use(
   (config) => {
     console.log('Setting Accept-Language to:', appStore.language); // Debugging
@@ -52,9 +66,3 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
-
-
-
-// تركيب التطبيق
-app.mount('#app');

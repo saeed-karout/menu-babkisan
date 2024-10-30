@@ -3,32 +3,23 @@
     <!-- Text Section -->
     <div class="flex-1 space-y-6 text-center lg:text-left">
       <p class="text-xs sm:text-sm tracking-widest uppercase">
-        Uncover a world of flavor at Bab Kissan: <br>
-        One of the finest middle eastern restaurants in Saudi Arabia
+        {{ t('sectionTwo.subtitle') }}
       </p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extralight uppercase text-white">
-        <span class="text-Gold">Authentic</span> <span class="text-white">Cuisine,</span> <br class="hidden sm:block">
-        Distinctive <span class="text-Gold">Flavors</span>
+        <span class="text-Gold">{{ t('sectionTwo.heading.part1') }}</span> <span class="text-white">{{ t('sectionTwo.heading.part2') }},</span><br class="hidden sm:block">
+        {{ t('sectionTwo.heading.part3') }} <span class="text-Gold">{{ t('sectionTwo.heading.part4') }}</span>
       </h2>
       <p class="text-sm sm:text-base leading-relaxed">
-        At Bab Kissan, we invite you to indulge in a culinary journey that celebrates the rich
-        traditions of Middle Eastern cuisine. As one of the premier Middle Eastern restaurants in
-        Riyadh and Jeddah, our menu features a delightful array of dishes that blend time-honored
-        recipes with a modern twist.
+        {{ t('sectionTwo.paragraph1') }}
       </p>
       <p class="text-sm sm:text-base leading-relaxed">
-        Crafted from the freshest ingredients and prepared by skilled chefs, our offerings showcase
-        the vibrant flavors and aromatic spices that define Middle Eastern cooking. Each dish is a
-        harmonious balance of authenticity and innovation, designed to delight your palate and warm
-        your soul.
+        {{ t('sectionTwo.paragraph2') }}
       </p>
       <p class="text-sm sm:text-base leading-relaxed">
-        Quality is our priority at Bab Kissan. We are committed to using only the finest ingredients
-        to create exceptional dining experiences. Our passion for culinary excellence ensures that
-        every meal reflects the true essence of Middle Eastern hospitality and tradition.
+        {{ t('sectionTwo.paragraph3') }}
       </p>
       <button class="mt-4 flex items-center justify-center lg:justify-start text-sm border-b border-white hover:border-[#fbbd0e] transition duration-300 uppercase">
-        Discover more about Bab Kissan in Riyadh
+        {{ t('sectionTwo.buttonText') }}
         <span class="ml-2">></span>
       </button>
     </div>
@@ -43,3 +34,9 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>

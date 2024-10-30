@@ -1,12 +1,14 @@
 {
-  "nav": {
-    "home": "Home",
-    "services": "Services",
-    "about": "About",
-    "news": "News",
-    "contact": "Contact",
-    "projects": "Projects"
-  },
+  
+  "who_are_we": "Who Are We",
+  "reviews": "Reviews",
+  "offers": "Offers",
+  "menus": "Menus",
+  "reserve": "Reserve",
+  "order_now": "Order Now",
+  "phone": "+966 503 954 909",
+  "language": "ع"
+  ,
   "brand": "bab kisan",
   
    
@@ -15,5 +17,88 @@
     "errorCategories": "Failed to load categories. Please try again later.",
     "errorItems": "Failed to load items. Please try again later.",
     "sar": "SAR"
-  
+  ,
+  "hero": {
+    "welcome": "Welcome to BAB KISAN",
+    "subtitle": "Savor the Flavors of the Middle East",
+    "description": "Experience a culinary journey like no other with our authentic dishes, crafted from the finest ingredients and infused with rich spices. Join us for a taste of tradition, where every meal tells a story.",
+    "reservePrompt": "Reserve Your Table Today!",
+    "buttons": {
+      "reserve": "Reserve a Table",
+      "learnMore": "Learn More"
+    }
+  }
+  ,
+  "sectionTwo": {
+    "subtitle": "Uncover a world of flavor at Bab Kissan: \nOne of the finest Middle Eastern restaurants in Saudi Arabia",
+    "heading": {
+      "part1": "Authentic",
+      "part2": "Cuisine,",
+      "part3": "Distinctive",
+      "part4": "Flavors"
+    },
+    "paragraph1": "At Bab Kissan, we invite you to indulge in a culinary journey that celebrates the rich traditions of Middle Eastern cuisine. As one of the premier Middle Eastern restaurants in Riyadh and Jeddah, our menu features a delightful array of dishes that blend time-honored recipes with a modern twist.",
+    "paragraph2": "Crafted from the freshest ingredients and prepared by skilled chefs, our offerings showcase the vibrant flavors and aromatic spices that define Middle Eastern cooking. Each dish is a harmonious balance of authenticity and innovation, designed to delight your palate and warm your soul.",
+    "paragraph3": "Quality is our priority at Bab Kissan. We are committed to using only the finest ingredients to create exceptional dining experiences. Our passion for culinary excellence ensures that every meal reflects the true essence of Middle Eastern hospitality and tradition.",
+    "buttonText": "Discover more about Bab Kissan in Riyadh"
+  },
+  "reviewsSection": {
+    "title": "What our customers say",
+    "googleReviews": "Reviews",
+    "reviewUsOnGoogle": "Review us on Google",
+    "postedOnGoogle": "Posted on Google",
+    "googleLogoAlt": "Google Logo"
+  },
+  "sectionThree": {
+    "subtitle": "Indulge in our signature dishes - the finest Middle Eastern cuisine",
+    "heading": {
+      "part1": "A Taste of",
+      "part2": "Bab Kissan's",
+      "part3": "Culinary",
+      "part4": "Artistry: Best",
+      "part5": "Middle Eastern",
+      "part6": "Food in Riyadh"
+    },
+    "description": "Experience the vibrant flavors of Bab Kissan, where each dish is a celebration of taste and artistry. If you're seeking an exceptional dining experience in Jeddah, our menu features everything from succulent grilled meats to flavorful mezze, inviting you to explore the rich traditions of Middle Eastern cuisine. Your table at Bab Kissan awaits!",
+    "buttonText": "Explore Bab Kissan's Menu",
+    "menuItems": {
+      "item1": {
+        "title": "Shawarma",
+        "description": "Grilled flatbread filled with shrimp tempura, avocado topped with bite-sized tempura shrimp."
+      },
+      "item2": {
+        "title": "Kebbeh & Shawarma",
+        "description": "Avocado wrapped red fish with salmon and truffle mayo then drizzled with unagi sauce."
+      },
+      "item3": {
+        "title": "Ura Maki",
+        "description": "Ura maki style filled with wakame crab mix, cucumber, avocado, wasabi mayo topped with wasabi tobiko."
+      },
+      "item4": {
+        "title": "Spicy Ura Maki",
+        "description": "Ura maki with shrimp tempura, cream cheese, cucumber, avocado, sweet and spicy wrap."
+      }
+    }
+  },
+  "footer": {
+    "title": {
+      "part1": "A Taste of",
+      "part2": "Bab Kissan's",
+      "part3": "Cuisine"
+    },
+    "decorativePattern": "Decorative Pattern",
+    "logoAlt": "Bab Kissan Logo",
+    "social": {
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "instagram": "Instagram",
+      "snapchat": "Snapchat"
+    },
+    "copyright": "© 2024 BAB KISSAN. All rights reserved.",
+    "phone": "+966 503 954 909",
+    "whatsapp": "+966 555 774 920",
+    "address": "Khalid ibn Al Walid St Gharnatah, Riyadh 13241 Saudi Arabia",
+    "poweredBy": "Powered by",
+    "poweredByLogoAlt": "Powered By Logo"
+  }
 }

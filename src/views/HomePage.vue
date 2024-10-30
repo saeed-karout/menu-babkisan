@@ -1,3 +1,4 @@
+<!-- MainPage.vue -->
 <script setup>
 import FooterComponent from '@/components/master/FooterComponent.vue';
 import HeroSection from '@/components/master/HeroSection.vue';
@@ -9,11 +10,12 @@ import SectionTwo from '@/components/master/SectionTwo.vue';
 
 <template>
   <div class="w-full">
-   <NavbarComponent />
-   <HeroSection />
-   <SectionTwo />
-   <SectionReviews />
-   <SectionThree />
-   <FooterComponent />
+    <NavbarComponent />
+    <HeroSection />
+    <!-- إضافة معرف للقسم الثاني -->
+    <SectionTwo id="section-two" />
+    <SectionReviews id="section-reviews" />
+    <SectionThree  id="section-three" />
+    <FooterComponent />
   </div>
 </template>
